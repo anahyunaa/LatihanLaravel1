@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 Route::get('/signin', function () {
-    return 'Signin Form';
+    return view('signin'); 
 });
 
 Route::post('/signin', function () {
@@ -21,7 +21,7 @@ Route::post('/signin', function () {
 });
 
 Route::get('/signup', function () {
-    return 'Signup Form';
+    return view('signup');
 });
 
 Route::post('/signup', function () {
@@ -33,11 +33,11 @@ Route::get('/', function () {
 });
 
 Route::get('/blog', function () {
-    return 'Daftar Artikel Blog:';
+    return view('blog');
 });
 
 Route::get('/blog/{slug}', function ($slug) {
-    return "Blog Post: $slug";
+    return view('blog-post', ['slug' => $slug]);
 });
 
 Route::get('/blog/{blogId}', function ($blogId) {
@@ -51,10 +51,12 @@ Route::get('/category/{slug}', function ($slug) {
     return "Category: $slug";
 });
 
-Route::get('/author/{username}', function ($username) {
-    return "Author: $username";
-});
+Route::get('/profile/{username}', function ($username) {
+    $email = 'user@putumertabhuana.com'; 
+    return view('profile', ['username' => $username, 'email' => $email]);
+})->middleware('auth');
 
 Route::get('/privacy-policy', function () {
     return 'ini halaman Kebijakan privasi';
 });
+
